@@ -172,7 +172,9 @@ fg.config(function (fgConfigProvider, FgField) {
   var categories = {
     'Text input fields': [
       new FgField('text', {
-        displayName: 'Textbox'
+        properties: {
+          displayName: 'Textbox'
+        }
       }),
       new FgField('email'),
       new FgField('number', {
@@ -184,67 +186,73 @@ fg.config(function (fgConfigProvider, FgField) {
     'Checkbox fields': [
       new FgField('checkbox', { nolabel: true }),
       new FgField('checkboxlist', {
-        displayName: 'Checkbox List',
-        options: [
-          {
-            value: '1',
-            text: 'Option 1'
-          },
-          {
-            value: '2',
-            text: 'Option 2'
-          },
-          {
-            value: '3',
-            text: 'Option 3'
+        properties: {
+          displayName: 'Checkbox List',
+          options: [
+            {
+              value: '1',
+              text: 'Option 1'
+            },
+            {
+              value: '2',
+              text: 'Option 2'
+            },
+            {
+              value: '3',
+              text: 'Option 3'
+            }
+          ],
+          value: {
+            '1': true,
+            '2': true
           }
-        ],
-        value: {
-          '1': true,
-          '2': true
         }
       })
     ],
     'Select input fields': [
       new FgField('radiobuttonlist', {
-        displayName: 'Radiobutton List',
-        options: [
-          {
-            value: '1',
-            text: 'Option 1'
-          },
-          {
-            value: '2',
-            text: 'Option 2'
-          },
-          {
-            value: '3',
-            text: 'Option 3'
-          }
-        ],
-        value: '1'
+        properties: {
+          displayName: 'Radiobutton List',
+          options: [
+            {
+              value: '1',
+              text: 'Option 1'
+            },
+            {
+              value: '2',
+              text: 'Option 2'
+            },
+            {
+              value: '3',
+              text: 'Option 3'
+            }
+          ],
+          value: '1'
+        }
       }),
       new FgField('selectlist', {
-        displayName: 'Select List',
-        options: [
-          {
-            value: '',
-            text: 'Select an option'
-          },
-          {
-            value: '1',
-            text: 'Option 1'
-          },
-          {
-            value: '2',
-            text: 'Option 2'
-          },
-          {
-            value: '3',
-            text: 'Option 3'
-          }
-        ],
-        value: ''
+        properties: {
+          displayName: 'Select List',
+          options: [
+            {
+              value: '',
+              text: 'Select an option'
+            },
+            {
+              value: '1',
+              text: 'Option 1'
+            },
+            {
+              value: '2',
+              text: 'Option 2'
+            },
+            {
+              value: '3',
+              text: 'Option 3'
+            }
+          ],
+          value: ''
+        }
       }) // ,
       // new FgField('dropdownlist', {
       //   options: [{
