@@ -17,8 +17,8 @@
                       dnd-draggable="field"
                       dnd-effect-allowed="move"
                       dnd-moved="schema.fields.splice($index, 1)"
-                      dnd-selected="field.$selected = field"
-                      ng-class="{selected: field.$selected === field}">
+                      dnd-selected="selected = field"
+                      ng-class="{selected: selected.selected === field}">
                   <!--ng-if="dragPlaceholder.visible && dragPlaceholder.index === $index"-->
                     <div ng-class="{ 'fg-drag-placeholder-visible' : dragPlaceholder.visible && dragPlaceholder.index === $index }"
                          class="fg-drag-placeholder"></div>
