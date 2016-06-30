@@ -2,11 +2,10 @@
     <!--<div class="form-horizontal">-->
         <fieldset>
             <legend>Canvas</legend>
+
+
             <div class="fg-edit-canvas-area"
-                 dq-drag-area="fg-edit-canvas"
-                 dq-drag-enter="canvasCtrl.dragEnter()"
-                 dq-drag-leave="canvasCtrl.dragLeave()"
-                 dq-drop="canvasCtrl.drop()">
+                 dnd-list="schema.fields">
                 <div ng-if="!(schema.fields.length)">
                     <div ng-if="!dragPlaceholder.visible" class="fg-edit-canvas-area-empty alert alert-info text-center">
                         <p class="fg-edit-canvas-area-empty-x">X</p>
@@ -14,7 +13,12 @@
                             <strong>palette</strong> onto this <strong>canvas</strong>.</p>
                     </div>
                 </div>
-                <div ng-repeat="field in schema.fields">
+                <div ng-repeat="field in schema.fields"
+                      dnd-draggable="field"
+                      dnd-effect-allowed="move"
+                      dnd-moved="schema.fields.splice($index, 1)"
+                      dnd-selected="field.$selected = field"
+                      ng-class="{selected: field.$selected === field}">
                   <!--ng-if="dragPlaceholder.visible && dragPlaceholder.index === $index"-->
                     <div ng-class="{ 'fg-drag-placeholder-visible' : dragPlaceholder.visible && dragPlaceholder.index === $index }"
                          class="fg-drag-placeholder"></div>
