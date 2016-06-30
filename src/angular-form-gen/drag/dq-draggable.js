@@ -37,7 +37,6 @@ angular.module('dq').directive('dqDraggable', function (dqUtils, $rootScope) {
           return dqUtils.stopEvent(e);
         }
       }).on('dragstart',function (e) {
-
           e = dqUtils.getEvent(e);
 
           if(disabled) {
@@ -53,7 +52,6 @@ angular.module('dq').directive('dqDraggable', function (dqUtils, $rootScope) {
           });
 
         }).on('dragend', function () {
-
           evalAndBroadcast('dqDragEnd', targetArea, $scope, $attrs.dqDragEnd, function() {
             dqUtils.dragData(null);
           });

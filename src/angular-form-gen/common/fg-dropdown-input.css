@@ -1,5 +1,5 @@
 .fg-dropdown {
-  z-index: 50;
+  z-index: 999999;
 }
 
 .fg-dropdown.open {

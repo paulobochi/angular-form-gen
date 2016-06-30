@@ -1,4 +1,3 @@
-
 .fg-edit-canvas .fg-field-properties .control-group {
   margin-bottom: 10px;
 }
@@ -34,6 +33,10 @@
   top: 20px;
   margin: 0;
   /*padding: 0;*/
+}
+
+.fg-edit-canvas-area-empty.alert {
+  margin-bottom: 0;
 }
 
 .fg-edit-canvas-area-empty-x {

@@ -16,7 +16,7 @@
 }
 
 .fg-dropdown {
-  z-index: 50;
+  z-index: 999999;
 }
 
 .fg-dropdown.open {
@@ -30,6 +30,7 @@
   max-height: 250px;
   overflow-y: auto;
 }
+
 .form .fg-edit {
   margin-left: -15px;
   margin-right: -15px;
@@ -190,7 +191,6 @@
 	border-top: none;
 	border-radius: 0px 0px 4px 4px;
 }
-
 .fg-edit-canvas .fg-field-properties .control-group {
   margin-bottom: 10px;
 }
@@ -224,6 +224,10 @@
   top: 20px;
   margin: 0;
   /*padding: 0;*/
+}
+
+.fg-edit-canvas-area-empty.alert {
+  margin-bottom: 0;
 }
 
 .fg-edit-canvas-area-empty-x {
@@ -300,6 +304,7 @@
     margin-bottom: 20px;
   }
 }
+
 
 /*.fg-edit-palette .controls {*/
   /*margin-left: 0;*/

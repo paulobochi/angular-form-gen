@@ -190,7 +190,7 @@ fg.config(function (fgConfigProvider, FgField) {
       new FgField('textarea')
     ],
     'Checkbox fields': [
-      new FgField('checkbox', { nolabel: true }),
+      new FgField('checkbox', { properties: { nolabel: true }}),
       new FgField('checkboxlist', {
         properties: {
           displayName: 'Checkbox List',
@@ -207,11 +207,11 @@ fg.config(function (fgConfigProvider, FgField) {
               value: '3',
               text: 'Option 3'
             }
-          ],
-          value: {
-            '1': true,
-            '2': true
-          }
+          ]
+        },
+        value: {
+          '1': true,
+          '2': true
         }
       })
     ],
@@ -233,8 +233,8 @@ fg.config(function (fgConfigProvider, FgField) {
               text: 'Option 3'
             }
           ],
-          value: '1'
-        }
+        },
+        value: '1'
       }),
       new FgField('selectlist', {
         properties: {
@@ -257,8 +257,8 @@ fg.config(function (fgConfigProvider, FgField) {
               text: 'Option 3'
             }
           ],
-          value: ''
-        }
+        },
+        value: ''
       }) // ,
       // new FgField('dropdownlist', {
       //   options: [{
@@ -273,6 +273,23 @@ fg.config(function (fgConfigProvider, FgField) {
       //   }],
       //   value: '1'
       // })
+    ],
+    'Custom Fields': [
+      new FgField('address', {
+        properties: {
+          displayName: 'Address'
+        }
+      }),
+      new FgField('fieldgroup', {
+        properties: {
+          displayName: 'Group'
+        }
+      }),
+      new FgField('fieldlist', {
+        properties: {
+          displayName: 'List'
+        }
+      })
     ]
   };
 

@@ -1,4 +1,4 @@
-<!-- 
+<!--
   input fields marked as fg-field-redraw will cause the initial value input to redraw
 -->
 
@@ -60,11 +60,13 @@
   <div fg-property-field="required">
     <div class="checkbox">
       <label title="Indicates if a value is required for this field.">
-        <input type="checkbox" ng-model="field.validation.required" />Required
+        <input type="checkbox" ng-model="field.validation.required" />
+        <i class="input-helper"></i>
+        Required
       </label>
     </div>
   </div>
-  
+
   <div ng-if="field.validation.required">
     <div fg-edit-validation-message="required"></div>
   </div>

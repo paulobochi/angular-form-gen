@@ -2,9 +2,9 @@
        fg-field-input
        type="text"
        id="{{ field.$_id }}"
-       title="{{ field.schema.tooltip }}"
+       title="{{ field.schema.properties.tooltip }}"
        tabindex="{{ tabIndex }}"
-       placeholder="{{ field.schema.placeholder }}"
+       placeholder="{{ field.schema.properties.placeholder }}"
        ng-model="form.data[field.schema.name]"
        ng-required="field.schema.validation.required"
        ng-minlength="{{ field.schema.validation.minlength }}"
