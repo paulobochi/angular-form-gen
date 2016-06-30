@@ -1,8 +1,7 @@
 <div class="fg-edit-canvas" ng-class="{ 'fg-edit-canvas-dragging': dragging }">
     <!--<div class="form-horizontal">-->
         <fieldset>
-            <legend>Canvas</legend>
-
+            <legend ng-if="!options.hideCanvasTitle">{{ options.canvasTitle || 'Canvas' }}</legend>
 
             <div class="fg-edit-canvas-area"
                  dnd-list="schema.fields">

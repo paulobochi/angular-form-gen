@@ -1,7 +1,7 @@
 <div class="fg-edit-palette">
   <!--<div class="form-horizontal">-->
     <fieldset>
-      <div fg-edit-palette-categories data-category="selectedCategory"></div>
+      <div fg-edit-palette-categories="options" data-category="selectedCategory"></div>
       <div ng-repeat="template in templates | filter:templateFilter" class="fg-field"
            dnd-draggable="template" dnd-effect-allowed="copy">
         <div class="fg-field-overlay">
