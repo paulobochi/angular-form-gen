@@ -39,7 +39,8 @@
   ],
   "dependencies": {
     "bootstrap": "~3.2.0",
-    "angular": "~1.2.21"
+    "angular": "~1.2.21",
+    "angular-drag-and-drop-lists": "^1.4.0"
   },
   "devDependencies": {
     "angular-route": "~1.2.21",

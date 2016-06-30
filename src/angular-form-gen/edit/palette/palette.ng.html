@@ -3,7 +3,7 @@
     <fieldset>
       <div fg-edit-palette-categories data-category="selectedCategory"></div>
       <div ng-repeat="template in templates | filter:templateFilter" class="fg-field"
-           dq-draggable="fg-edit-canvas" dq-drag-begin="{ source: 'palette', field: template }">
+           dnd-draggable="template" dnd-effect-allowed="copy">
         <div class="fg-field-overlay">
           <div class="btn-toolbar btn-toolbar-right">
             <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="schemaCtrl.addField(template)"
