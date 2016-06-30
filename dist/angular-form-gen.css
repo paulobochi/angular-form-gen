@@ -281,6 +281,14 @@
   display: none;
 }
 
+.fg-edit-canvas .dndPlaceholder {
+    background-color: #ddd;
+    min-height: 42px;
+    display: block;
+    position: relative;
+    margin-bottom: 20px;
+}
+
 /* Landscape phones and down */
 /*@media (max-width: 480px) {*/
 

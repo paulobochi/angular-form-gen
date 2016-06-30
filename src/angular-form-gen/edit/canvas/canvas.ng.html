@@ -18,15 +18,8 @@
                       dnd-effect-allowed="move"
                       dnd-moved="schema.fields.splice($index, 1)"
                       dnd-selected="selected = field"
-                      ng-class="{selected: selected.selected === field}">
-                  <!--ng-if="dragPlaceholder.visible && dragPlaceholder.index === $index"-->
-                    <div ng-class="{ 'fg-drag-placeholder-visible' : dragPlaceholder.visible && dragPlaceholder.index === $index }"
-                         class="fg-drag-placeholder"></div>
+                      ng-class="{selected: selected === field}">
                     <div fg-edit-canvas-field></div>
-                </div>
-                <!--<div class="fg-drag-placeholder">-->
-                <!--<div ng-if="dragPlaceholder.visible && dragPlaceholder.index == schema.fields.length" class="fg-drag-placeholder">-->
-                <div ng-class="{ 'fg-drag-placeholder-visible': dragPlaceholder.visible && dragPlaceholder.index == schema.fields.length }" class="fg-drag-placeholder">
                 </div>
             </div>
         </fieldset>
