@@ -3,7 +3,8 @@ fg.directive('fgEditPaletteCategories', function () {
     templateUrl: 'angular-form-gen/edit/palette/categories/categories.ng.html',
     require: '^fgEditPalette',
     scope: {
-      category: "=?"
+      category: "=?",
+      options: '=?fgEditPaletteCategories'
     },
     controller: 'fgEditPaletteCategoriesController'
   };

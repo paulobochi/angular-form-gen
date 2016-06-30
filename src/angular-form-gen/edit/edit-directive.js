@@ -5,7 +5,8 @@ fg.directive('fgEdit', function () {
     restrict: 'AE',
     scope: {
       // // The schema model to edit
-      schema: '=?fgSchema'
+      schema: '=?fgSchema',
+      options: '=?fgEdit'
 //      // Boolean indicating wether to show the default form action buttons
 //      actionsEnabled: '=?fgActionsEnabled',
 //      // Callback function when the user presses save -- any argument named 'schema' is set to the schema model.
