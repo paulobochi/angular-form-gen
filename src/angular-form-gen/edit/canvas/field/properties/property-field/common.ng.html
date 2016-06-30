@@ -26,7 +26,7 @@
 <!-- displayName -->
 <div ng-if="fields.displayname">
   <div fg-property-field="displayName" fg-property-field-label="Display name">
-    <input type="text" class="form-control" name="displayName" ng-model="field.displayName"/>
+    <input type="text" class="form-control" name="displayName" ng-model="field.properties.displayName"/>
   </div>
 </div>
 
@@ -36,7 +36,7 @@
     <input type="text"
            class="form-control"
            name="fieldPlaceholder"
-           ng-model="field.placeholder"/>
+           ng-model="field.properties.placeholder"/>
   </div>
 </div>
 
@@ -46,7 +46,6 @@
     <input type="text"
            class="form-control"
            name="fieldTooltip"
-           ng-model="field.tooltip"/>
+           ng-model="field.properties.tooltip"/>
   </div>
 </div>
-

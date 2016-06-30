@@ -46,6 +46,7 @@
   line-height: 20px;
   right: auto;
   left: auto;
+  z-index: 99999;
 }
 
 

@@ -28,6 +28,7 @@
 .fg-edit-canvas-field .form-group, .fg-edit-palette .form-group {
   margin-top: 5px;
   margin-bottom: 0px;
+  overflow: hidden;
 }
 
 .fg-field {

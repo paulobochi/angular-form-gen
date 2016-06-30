@@ -12,7 +12,13 @@ fg.constant('FgField', function FgField(type, properties) {
       angular.extend(this, properties);
     }
 
-    this.displayName = this.displayName || this.type.charAt(0).toUpperCase() + this.type.substring(1);
+    if (this.properties) {
+      this.properties.displayName = this.properties.displayName || this.type.charAt(0).toUpperCase() + this.type.substring(1);
+    } else {
+      this.properties = {
+        displayName : this.type.charAt(0).toUpperCase() + this.type.substring(1)
+      }
+    }
   }
 );
 
