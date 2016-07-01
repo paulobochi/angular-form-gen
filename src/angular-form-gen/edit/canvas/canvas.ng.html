@@ -4,7 +4,8 @@
             <legend ng-if="!options.hideCanvasTitle">{{ options.canvasTitle || 'Canvas' }}</legend>
 
             <div class="fg-edit-canvas-area"
-                 dnd-list="schema.fields">
+                 dnd-list="schema.fields"
+                 dnd-drop="canvasCtrl.dropCallback(event, index, item, external, type)">
                 <div ng-if="!(schema.fields.length)">
                     <div ng-if="!dragPlaceholder.visible" class="fg-edit-canvas-area-empty alert alert-info text-center">
                         <p class="fg-edit-canvas-area-empty-x">X</p>
@@ -16,7 +17,6 @@
                       dnd-draggable="field"
                       dnd-effect-allowed="move"
                       dnd-moved="schema.fields.splice($index, 1)"
-                      dnd-drop="canvasCtrl.onDrop(event, index, item, external, type)"
                       dnd-selected="selected = field"
                       ng-class="{selected: selected.selected === field}">
                   <!--ng-if="dragPlaceholder.visible && dragPlaceholder.index === $index"-->
