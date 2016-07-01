@@ -4,7 +4,8 @@
             <legend ng-if="!options.hideCanvasTitle">{{ options.canvasTitle || 'Canvas' }}</legend>
 
             <div class="fg-edit-canvas-area"
-                 dnd-list="schema.fields">
+                 dnd-list="schema.fields"
+                 dnd-disable-if="options.canvasMaxSize && schema.fields.length == options.canvasMaxSize">
                 <div ng-if="!(schema.fields.length)">
                     <div ng-if="!dragPlaceholder.visible" class="fg-edit-canvas-area-empty alert alert-info text-center">
                         <p class="fg-edit-canvas-area-empty-x">X</p>
