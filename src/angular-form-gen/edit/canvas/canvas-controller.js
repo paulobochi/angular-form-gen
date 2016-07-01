@@ -77,4 +77,8 @@ fg.controller('fgEditCanvasController', function ($scope, dqUtils, $timeout, fgU
     }
   };
 
+  this.onDrop = function (event, index, item, external, type) {
+    console.log(JSON.stringify(item));
+  }
+
 });
