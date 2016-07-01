@@ -77,4 +77,9 @@ fg.controller('fgEditCanvasController', function ($scope, dqUtils, $timeout, fgU
     }
   };
 
+  this.dropCallback = function(event, index, item, external, type) {
+    item.name = 'field' + fgUtils.getUnique();
+    return item;
+  }
+
 });
