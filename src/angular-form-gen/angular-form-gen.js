@@ -275,11 +275,11 @@ fg.config(function (fgConfigProvider, FgField) {
       // })
     ],
     'Custom Fields': [
-      new FgField('address', {
+      /*new FgField('address', {
         properties: {
           displayName: 'Address'
         }
-      }),
+      }),*/
       new FgField('fieldgroup', {
         properties: {
           displayName: 'Group'

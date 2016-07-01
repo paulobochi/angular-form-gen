@@ -5,7 +5,7 @@
 
             <div class="fg-edit-canvas-area"
                  dnd-list="schema.fields"
-                 dnd-drop="canvasCtrl.dropCallback(event, index, item, external, type)">
+                 dnd-drop="canvasCtrl.dropCallback(event, index, item, external, type)"
                  dnd-disable-if="options.canvasMaxSize && schema.fields.length == options.canvasMaxSize">
                 <div ng-if="!(schema.fields.length)">
                     <div ng-if="!dragPlaceholder.visible" class="fg-edit-canvas-area-empty alert alert-info text-center">
