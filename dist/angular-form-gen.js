@@ -343,8 +343,8 @@ angular.module('fg').run(['$templateCache', function($templateCache){
   $templateCache.put('angular-form-gen/field-templates/default/checkboxlist.ng.html', '<div fg-checkboxlist=\"\" fg-field-input=\"\" ng-model=\"form.data[field.schema.name]\" name=\"{{ field.schema.name }}\"><div class=\"checkbox\" ng-repeat=\"option in field.schema.properties.options\"><label title=\"{{ field.schema.tooltip }}\"><input type=\"checkbox\" tabindex=\"{{ tabIndex }}\" value=\"{{ option.value }}\" ng-model=\"form.data[field.schema.name][option.value]\"> <i class=\"input-helper\"></i> <span>{{option.text || option.value}}</span></label></div></div>');
   $templateCache.put('angular-form-gen/field-templates/default/dropdownlist.ng.html', '<div fg-field-input=\"\" fg-dropdown-input=\"field.schema.options\" title=\"{{ field.schema.tooltip }}\" id=\"{{ field.$_id }}\" ng-model=\"form.data[field.schema.name]\" ng-required=\"field.schema.validation.required\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ field.schema.placeholder }}\" ng-minlength=\"{{ field.schema.validation.minlength }}\" ng-maxlength=\"{{ field.schema.validation.maxlength }}\" ng-pattern=\"/{{ field.schema.validation.pattern }}/\"></div>');
   $templateCache.put('angular-form-gen/field-templates/default/email.ng.html', '<input class=\"form-control\" fg-field-input=\"\" type=\"email\" id=\"{{ field.$_id }}\" title=\"{{ field.schema.tooltip }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ field.schema.placeholder }}\" ng-model=\"form.data[field.schema.name]\" ng-required=\"field.schema.validation.required\" ng-minlength=\"{{ field.schema.validation.minlength }}\" ng-maxlength=\"{{ field.schema.validation.maxlength }}\" ng-pattern=\"{{field.schema.validation.pattern}}\">');
-  $templateCache.put('angular-form-gen/field-templates/default/fieldgroup.ng.html', '<div class=\"checkbox\"><label title=\"{{ field.schema.tooltip }}\"><input fg-field-input=\"\" id=\"{{ field.$_id }}\" type=\"checkbox\" tabindex=\"{{ tabIndex }}\" ng-model=\"form.data[field.schema.name]\"> <i class=\"input-helper\"></i> <span ng-if=\"field.schema.nolabel\">{{ field.schema.properties.displayName }}</span></label></div>');
-  $templateCache.put('angular-form-gen/field-templates/default/fieldlist.ng.html', '<div class=\"checkbox\"><label title=\"{{ field.schema.tooltip }}\"><input fg-field-input=\"\" id=\"{{ field.$_id }}\" type=\"checkbox\" tabindex=\"{{ tabIndex }}\" ng-model=\"form.data[field.schema.name]\"> <i class=\"input-helper\"></i> <span ng-if=\"field.schema.nolabel\">{{ field.schema.properties.displayName }}</span></label></div>');
+  $templateCache.put('angular-form-gen/field-templates/default/fieldgroup.ng.html', '<fieldset><span ng-if=\"field.schema.nolabel\">{{ field.schema.properties.displayName }}</span><div ng-repeat=\"field in field.schema.childs.fields\"><div fg-field=\"field\"></div></div></fieldset>');
+  $templateCache.put('angular-form-gen/field-templates/default/fieldlist.ng.html', '<fieldset fg-fieldlist=\"\"><span ng-if=\"field.schema.nolabel\">{{ field.schema.properties.displayName }}</span><div ng-repeat=\"field in field.schema.childs.fields\"><div fg-field=\"field\"></div></div><button type=\"button\" class=\"btn btn-default\" ng-click=\"addField()\">Add</button></fieldset>');
   $templateCache.put('angular-form-gen/field-templates/default/not-in-cache.ng.html', '<div class=\"fg-field-not-in-cache alert alert-error\"><p>No template registered in cache for field type \"{{ field.type }}\".</p></div>');
   $templateCache.put('angular-form-gen/field-templates/default/number.ng.html', '<input class=\"form-control\" fg-field-input=\"\" fg-input-number=\"\" type=\"text\" id=\"{{ field.$_id }}\" title=\"{{ field.schema.tooltip }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ field.schema.placeholder }}\" min=\"{{ field.schema.validation.min }}\" max=\"{{ field.schema.validation.max }}\" ng-model=\"form.data[field.schema.name]\" ng-required=\"field.schema.validation.required\" ng-minlength=\"{{ field.schema.validation.minlength }}\" ng-maxlength=\"{{ field.schema.validation.maxlength }}\" ng-pattern=\"{{field.schema.validation.pattern}}\">');
   $templateCache.put('angular-form-gen/field-templates/default/password.ng.html', '<input class=\"form-control\" fg-field-input=\"\" type=\"password\" id=\"{{ field.$_id }}\" title=\"{{ field.schema.tooltip }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ field.schema.placeholder }}\" ng-model=\"form.data[field.schema.name]\" ng-required=\"field.schema.validation.required\" ng-minlength=\"{{ field.schema.validation.minlength }}\" ng-maxlength=\"{{ field.schema.validation.maxlength }}\" ng-pattern=\"{{field.schema.validation.pattern}}\">');
@@ -1852,6 +1852,26 @@ fg.directive('fgCheckboxlist', function() {
   };
 });
 
+fg.directive('fgFieldlist', function() {
+
+  return {
+    require: ['^fgField'],
+    link: function($scope, $element, $attrs, $ctrls) {
+      var field = $ctrls[0].field();
+
+      $scope.addField = function() {
+        console.log(JSON.stringify(field));
+        if (field.schema.childs != null && field.schema.childs.fields != null) {
+          console.log(JSON.stringify(field.schema.childs.fields[0]));
+          var child = angular.copy(field.schema.childs.fields[0]);
+          console.log(JSON.stringify(child));
+          field.schema.childs.fields.push(child);
+        }
+      }
+    }
+  };
+});
+
 fg.directive('fgSelectlist', ["$timeout", function($timeout) {
 
   // Angular adds a '? undefined:undefined ?' option dom element if it cannot find a matching model value in the
@@ -2393,6 +2413,84 @@ fg.directive('fgPropertyFieldOptions', ["fgPropertyFieldOptionsLinkFn", function
     });
   };
 });
+fg.directive('fgParsePattern', function() {
+
+  return {
+    require: ['ngModel'],
+    link: function($scope, $element, $attrs, ctrls) {
+      var ngModelCtrl = ctrls[0];
+
+      ngModelCtrl.$parsers.push(validate);
+      
+      function validate(value) {
+        try {
+          new RegExp(value);
+        } catch(e) {
+          ngModelCtrl.$setValidity('pattern', false);
+          return undefined;
+        }
+
+        ngModelCtrl.$setValidity('pattern', true);
+        return value;
+      }
+    }
+  };
+});
+fg.directive('fgPropertyFieldValidation', ["fgPropertyFieldValidationLinkFn", function(fgPropertyFieldValidationLinkFn) {
+  return {
+    restrict: 'A',
+    templateUrl: 'angular-form-gen/edit/canvas/field/properties/validation/validation.ng.html',
+    link: fgPropertyFieldValidationLinkFn
+  };
+}]).factory('fgPropertyFieldValidationLinkFn', ["fgConfig", function(fgConfig) {
+
+  var patternOptions = [];
+  var patternConfig = fgConfig.validation.patterns;
+
+  angular.forEach(patternConfig, function(value, text) {
+    patternOptions.push({ value: value, text: text });
+  });
+
+  return function($scope, $element, $attrs, ctrls) {
+
+    $scope.patternOptions = patternOptions;
+
+    $scope.field.validation = $scope.field.validation || {};
+    $scope.field.validation.messages = $scope.field.validation.messages || {};
+
+    $scope.fields = {
+      required: false,
+      minlength: false,
+      maxlength: false,
+      pattern: false
+    };
+
+    $scope.$watch($attrs['fgPropertyFieldValidation'], function(value) {
+      $scope.fields = angular.extend($scope.fields, value);
+    });
+  };
+}]);
+fg.directive('fgEditValidationMessage', ["fgEditValidationMessageLinkFn", function(fgEditValidationMessageLinkFn) {
+  return {
+    templateUrl: 'angular-form-gen/edit/canvas/field/properties/validation/validation-message.ng.html',
+    link: fgEditValidationMessageLinkFn,
+    scope: true
+  };
+}]).factory('fgEditValidationMessageLinkFn', function() {
+
+  var DEFAULT_TOOLTIP = "Enter a error message here that will be shown if this validation fails. If this field is empty a default message will be used.";
+  
+  return function($scope, $element, $attrs, ctrls) {
+    $attrs.$observe('fgEditValidationMessage', function(value) {
+      $scope.validationType = value;
+    });
+
+    $attrs.$observe('fgEditValidationTooltip', function(value) {
+      value = value || DEFAULT_TOOLTIP;
+      $scope.tooltip = value;
+    });
+  };
+});
 fg.directive('fgPropertyFieldCommon', ["fgPropertyFieldCommonLinkFn", function(fgPropertyFieldCommonLinkFn) {
   return {
     restrict: 'AE',
@@ -2518,84 +2616,6 @@ fg.directive('fgPropertyField', ["fgPropertyFieldLinkFn", function(fgPropertyFie
       }
     });
 
-  };
-});
-fg.directive('fgParsePattern', function() {
-
-  return {
-    require: ['ngModel'],
-    link: function($scope, $element, $attrs, ctrls) {
-      var ngModelCtrl = ctrls[0];
-
-      ngModelCtrl.$parsers.push(validate);
-      
-      function validate(value) {
-        try {
-          new RegExp(value);
-        } catch(e) {
-          ngModelCtrl.$setValidity('pattern', false);
-          return undefined;
-        }
-
-        ngModelCtrl.$setValidity('pattern', true);
-        return value;
-      }
-    }
-  };
-});
-fg.directive('fgPropertyFieldValidation', ["fgPropertyFieldValidationLinkFn", function(fgPropertyFieldValidationLinkFn) {
-  return {
-    restrict: 'A',
-    templateUrl: 'angular-form-gen/edit/canvas/field/properties/validation/validation.ng.html',
-    link: fgPropertyFieldValidationLinkFn
-  };
-}]).factory('fgPropertyFieldValidationLinkFn', ["fgConfig", function(fgConfig) {
-
-  var patternOptions = [];
-  var patternConfig = fgConfig.validation.patterns;
-
-  angular.forEach(patternConfig, function(value, text) {
-    patternOptions.push({ value: value, text: text });
-  });
-
-  return function($scope, $element, $attrs, ctrls) {
-
-    $scope.patternOptions = patternOptions;
-
-    $scope.field.validation = $scope.field.validation || {};
-    $scope.field.validation.messages = $scope.field.validation.messages || {};
-
-    $scope.fields = {
-      required: false,
-      minlength: false,
-      maxlength: false,
-      pattern: false
-    };
-
-    $scope.$watch($attrs['fgPropertyFieldValidation'], function(value) {
-      $scope.fields = angular.extend($scope.fields, value);
-    });
-  };
-}]);
-fg.directive('fgEditValidationMessage', ["fgEditValidationMessageLinkFn", function(fgEditValidationMessageLinkFn) {
-  return {
-    templateUrl: 'angular-form-gen/edit/canvas/field/properties/validation/validation-message.ng.html',
-    link: fgEditValidationMessageLinkFn,
-    scope: true
-  };
-}]).factory('fgEditValidationMessageLinkFn', function() {
-
-  var DEFAULT_TOOLTIP = "Enter a error message here that will be shown if this validation fails. If this field is empty a default message will be used.";
-  
-  return function($scope, $element, $attrs, ctrls) {
-    $attrs.$observe('fgEditValidationMessage', function(value) {
-      $scope.validationType = value;
-    });
-
-    $attrs.$observe('fgEditValidationTooltip', function(value) {
-      value = value || DEFAULT_TOOLTIP;
-      $scope.tooltip = value;
-    });
   };
 });
 })(angular);

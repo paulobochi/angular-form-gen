@@ -1,11 +1,6 @@
-<div class="checkbox">
-  <label title="{{ field.schema.tooltip }}">
-    <input fg-field-input
-           id="{{ field.$_id }}"
-           type="checkbox"
-           tabindex="{{ tabIndex }}"
-           ng-model="form.data[field.schema.name]">
-    <i class="input-helper"></i>
-    <span ng-if="field.schema.nolabel">{{ field.schema.properties.displayName }}</span>
-  </label>
-</div>
+<fieldset>
+  <span ng-if="field.schema.nolabel">{{ field.schema.properties.displayName }}</span>
+  <div ng-repeat="field in field.schema.childs.fields">
+    <div fg-field="field"></div>
+  </div>
+</fieldset>
