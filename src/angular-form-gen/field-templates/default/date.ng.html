@@ -1,0 +1,16 @@
+<div class="date-picker input-group" ng-class="{ 'is-opened': field.$opened == true }">
+    <span class="input-group-addon"><i class="zmdi zmdi-calendar ma-icon"></i></span>
+    <div class="fg-line" ng-class="{ 'fg-toggled': field.$opened == true }">
+        <input fg-field-input id="{{ field.$_id }}"
+            title="{{ field.schema.properties.tooltip }}"
+            tabindex="{{ tabIndex }}"
+            placeholder="{{ field.schema.properties.placeholder }}"
+            type="text" class="form-control"
+            uib-datepicker-popup="dd/MM/yyyy"
+            close-text="Close"
+            is-open="field.$opened"
+            ng-model="field.data.value"
+            ng-click="field.$opened = true"
+            ng-required="field.schema.validation.required"/>
+    </div>
+</div>

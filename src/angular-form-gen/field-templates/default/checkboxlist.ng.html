@@ -1,10 +1,10 @@
-<div fg-checkboxlist fg-field-input ng-model="form.data[field.schema.name]" name="{{ field.schema.name }}">
+<div fg-checkboxlist fg-field-input ng-model="field.data.value" name="{{ field.schema.name }}" >
   <div class="checkbox" ng-repeat="option in field.schema.properties.options">
     <label title="{{ field.schema.tooltip }}">
       <input type="checkbox"
              tabindex="{{ tabIndex }}"
              value="{{ option.value }}"
-             ng-model="form.data[field.schema.name][option.value]">
+             ng-model="field.data.value[option.value]">
       <i class="input-helper"></i>
       <span>{{option.text || option.value}}</span>
     </label>

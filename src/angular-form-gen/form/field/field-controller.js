@@ -3,15 +3,15 @@ fg.controller('fgFieldController', function($scope, fgUtils) {
   var self = this;
   var _form, _field;
 
-  this.init = function(fgFormCtrl, fieldSchema, editMode) {
-    
+  this.init = function(fgFormCtrl, fieldSchema, editMode, parent) {
+
     self.initForm(fgFormCtrl);
     self.initField(fieldSchema);
-    self.initDefaultData(fieldSchema, editMode);
+    self.initDefaultData(fieldSchema, editMode, parent);
 
     $scope.form = _form;
     $scope.field = _field;
-    
+
   };
 
   this.initForm = function(fgFormCtrl) {
@@ -24,8 +24,13 @@ fg.controller('fgFieldController', function($scope, fgUtils) {
 
     _field = {
       $_id: 'id' + fgUtils.getUnique(),
-      schema: fieldSchema
+      schema: fieldSchema,
+      data: {}
     };
+
+    if (fieldSchema) {
+      _field.data.name = fieldSchema.name
+    }
 
     $scope.$watch('field.schema.name', function(value, oldValue) {
       self.registerState(value);
@@ -34,28 +39,43 @@ fg.controller('fgFieldController', function($scope, fgUtils) {
     return _field;
   };
 
-  this.initDefaultData = function(fieldSchema, editMode) {
+  this.initDefaultData = function(fieldSchema, editMode, parent) {
 
     var fieldName = fieldSchema.name;
 
-    _form.data = _form.data || {};
-    
+    _form.data = _form.data || [];
+
+    if (_form.data.fields == null) {
+      _form.data.fields = [];
+    }
+
+    if (_field) {
+      if (parent) {
+        if (parent.data.fields == null) {
+          parent.data.fields = [];
+        }
+        parent.data.fields.push(_field.data);
+      } else {
+        _form.data.fields.push(_field.data);
+      }
+    }
+
     if (editMode) {
-      
+
       $scope.$watch('field.schema.value', function(value) {
-        _form.data[fieldSchema.name] = value;
+        if (_field !== undefined) {
+          _field.data.value = value;
+        }
       });
 
       $scope.$watch('field.schema.name', function(value, oldValue) {
         if(value !== oldValue) {
-          var data = _form.data[oldValue];
-          delete _form.data[oldValue];
-          _form.data[value] = data;
+          _field.data.name = value;
         }
       });
 
-    } else if (_form.data && _form.data[fieldName] === undefined && fieldSchema.value !== undefined) {
-      _form.data[fieldName] = angular.copy(fieldSchema.value);
+    } else if (_field !== undefined && _field.data.value === undefined && fieldSchema.value !== undefined) {
+      _field.data.value = angular.copy(fieldSchema.value);
     }
 
     return _form.data;

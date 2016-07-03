@@ -5,7 +5,7 @@
            name="{{ field.schema.name }}[]"
            tabindex="{{ tabIndex }}"
            value="{{ option.value }}"
-           ng-model="form.data[field.schema.name]"
+           ng-model="field.data.value"
            ng-required="field.schema.validation.required">
     <i class="input-helper"></i>
     <span>{{option.text || option.value}}</span>

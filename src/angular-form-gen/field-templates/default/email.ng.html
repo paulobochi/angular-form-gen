@@ -5,7 +5,7 @@
        title="{{ field.schema.tooltip }}"
        tabindex="{{ tabIndex }}"
        placeholder="{{ field.schema.placeholder }}"
-       ng-model="form.data[field.schema.name]"
+       ng-model="field.data.value"
        ng-required="field.schema.validation.required"
        ng-minlength="{{ field.schema.validation.minlength }}"
        ng-maxlength="{{ field.schema.validation.maxlength }}"

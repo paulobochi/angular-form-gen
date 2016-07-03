@@ -40,7 +40,8 @@
   "dependencies": {
     "bootstrap": "~3.2.0",
     "angular": "~1.2.21",
-    "angular-drag-and-drop-lists": "^1.4.0"
+    "angular-drag-and-drop-lists": "^1.4.0",
+    "angular-input-masks": "^2.4.0"
   },
   "devDependencies": {
     "angular-route": "~1.2.21",
@@ -70,6 +71,6 @@
     }
   },
   "resolutions": {
-    "angular": "~1.2.16"
+    "angular": "~1.2.21"
   }
 }

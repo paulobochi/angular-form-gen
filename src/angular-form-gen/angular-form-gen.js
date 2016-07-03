@@ -187,6 +187,9 @@ fg.config(function (fgConfigProvider, FgField) {
         validation: { maxlength: 15 /* to prevent > Number.MAX_VALUE */ }
       }),
       new FgField('password'),
+      new FgField('phone'),
+      new FgField('cpf'),
+      new FgField('date'),
       new FgField('textarea')
     ],
     'Checkbox fields': [

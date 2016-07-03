@@ -8,6 +8,7 @@ fg.directive('fgField', function(fgFieldLinkFn) {
       fieldSchema: '=fgField', // The schema definition of the field
       tabIndex: '=?fgTabIndex', // Optional tab index -- used in overlay mode to disable focus
       editMode: '=?fgEditMode', // Indicates edit mode, which will sync the fieldSchema.value
+      parent: '=fgParent', //Parent if exist
       // to the form data for WYSIWYG pleasures.
       noValidationSummary: '=fgNoValidationSummary' // If true hides the validation summary
     },
@@ -27,6 +28,6 @@ fg.directive('fgField', function(fgFieldLinkFn) {
 
     $scope.renderInfo = fgUtils.getRenderInfo($scope.fieldSchema);
 
-    fgFieldCtrl.init(fgFormCtrl, $scope.fieldSchema, $scope.editMode);
+    fgFieldCtrl.init(fgFormCtrl, $scope.fieldSchema, $scope.editMode, $scope.parent);
   };
 });

@@ -4,7 +4,7 @@
            id="{{ field.$_id }}"
            type="checkbox"
            tabindex="{{ tabIndex }}"
-           ng-model="form.data[field.schema.name]">
+           ng-model="field.data.value">
     <i class="input-helper"></i>
     <span ng-if="field.schema.properties.nolabel">{{ field.schema.properties.displayName }}</span>
   </label>

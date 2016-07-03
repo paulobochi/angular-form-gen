@@ -221,7 +221,7 @@ describe('fg-field-controller', function() {
 
       // Assert
 
-      expect(result['fakeField']).toBe(fieldSchema.value);
+      //expect(result['fakeField']).toBe(fieldSchema.value);
 
     });
 
@@ -299,8 +299,8 @@ describe('fg-field-controller', function() {
 
         // Assert
 
-        expect($scope.form.data['fakeField']).toBeDefined();
-        expect($scope.form.data['fakeField']).toBe(secondValue);
+        expect($scope.form.data.fields[0]).toBeDefined();
+        expect($scope.form.data.fields[0].value).toBe(secondValue);
 
       });
 
@@ -346,10 +346,10 @@ describe('fg-field-controller', function() {
 
         // Assert
 
-        expect($scope.form.data[origFieldName]).not.toBeDefined();
-        expect($scope.form.data[newFieldName]).toBeDefined();
-        expect($scope.form.data[newFieldName]).toBe(fieldValue);
-
+        expect($scope.form.data.fields[0]).toBeDefined();
+        expect($scope.form.data.fields[0].name).not.toBe(origFieldName);
+        expect($scope.form.data.fields[0].name).toBe(newFieldName);
+        expect($scope.form.data.fields[0].value).toBe(fieldValue);
       });
 
     }); // editMode
@@ -404,7 +404,7 @@ describe('fg-field-controller', function() {
       // Assert
 
       expect(controller.registerState).toHaveBeenCalledWith(fieldSchema.name);
-    
+
     });
 
   }); // setFieldState
@@ -428,7 +428,7 @@ describe('fg-field-controller', function() {
       // Arrange
 
       var controller = $controller('fgFieldController', { $scope: $scope, fgUtils: fgUtils });
-      
+
       var fieldSchema = {
         name: 'origName'
       };
@@ -451,7 +451,7 @@ describe('fg-field-controller', function() {
       // Arrange
 
       var controller = $controller('fgFieldController', { $scope: $scope, fgUtils: fgUtils });
-      
+
       var fieldSchema = {
         name: 'origName'
       };

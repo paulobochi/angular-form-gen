@@ -8,7 +8,7 @@
        placeholder="{{ field.schema.placeholder }}"
        min="{{ field.schema.validation.min }}"
        max="{{ field.schema.validation.max }}"
-       ng-model="form.data[field.schema.name]"
+       ng-model="field.data.value"
        ng-required="field.schema.validation.required"
        ng-minlength="{{ field.schema.validation.minlength }}"
        ng-maxlength="{{ field.schema.validation.maxlength }}"
