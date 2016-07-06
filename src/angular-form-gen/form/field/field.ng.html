@@ -6,6 +6,6 @@
 
 	<label ng-if="field.schema.type == 'date'" class="control-label" for="{{ field.$_id }}">{{ fieldSchema.properties.displayName }}</label>
 	<div ng-include="renderInfo.templateUrl" ng-if="field.schema.type == 'date'"></div>
-
+	
 	<div fg-validation-summary fg-validation-messages="fieldSchema.validation.messages" ng-if="!noValidationSummary"></div>
 </div>
