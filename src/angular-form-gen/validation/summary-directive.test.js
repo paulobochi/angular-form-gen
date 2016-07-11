@@ -63,7 +63,7 @@ describe('fg-validation-summary', function() {
         // Act
 
         $scope.$digest();
-        var result = setup.$fixture.find('li');
+        var result = setup.$fixture.find('small');
 
         // Assert
 
@@ -88,7 +88,7 @@ describe('fg-validation-summary', function() {
         // Act
 
         $scope.$digest();
-        var result = setup.$fixture.find('li');
+        var result = setup.$fixture.find('small');
 
         // Assert
 
@@ -112,7 +112,7 @@ describe('fg-validation-summary', function() {
         // Act
 
         $scope.$digest();
-        var result = setup.$fixture.find('li');
+        var result = setup.$fixture.find('small');
 
         // Assert
 
@@ -131,7 +131,8 @@ describe('fg-validation-summary', function() {
           name: 'myField',
           state: {
             $invalid: true,
-            $dirty: true
+            $dirty: true,
+            $touched: true
           }
         };
 
@@ -156,7 +157,7 @@ describe('fg-validation-summary', function() {
 
     });
 
-    describe('when form controller is available', function() {
+    /*describe('when form controller is available', function() {
 
       var setup = {};
 
@@ -166,7 +167,8 @@ describe('fg-validation-summary', function() {
           name: 'myField',
           state: {
             $invalid: true,
-            $dirty: true
+            $dirty: true,
+            $touched: true
           }
         };
 
@@ -181,7 +183,7 @@ describe('fg-validation-summary', function() {
 
       runTests(setup);
 
-    });
+    });*/
 
   });
 

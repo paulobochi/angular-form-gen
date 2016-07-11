@@ -434,7 +434,7 @@
   -ms-user-select: initial;
   user-select: initial;
 
-  z-index: 20; /* above .fg-field-overlay */
+  z-index: 10; /* above .fg-field-overlay */
 }
 
 /*.fg-field-properties form {*/
@@ -512,10 +512,10 @@
   }
 }
 
-/*@media (max-width: 767px) { 
+/*@media (max-width: 767px) {
 	.table-field-options input[type="text"] {
 		width: 90px;
-	}	
+	}
 }*/
 
 @media (max-width: 480px) {
@@ -532,9 +532,6 @@
     /*margin: 0;*/
   /*}*/
 }
-
-
-
 
 
 .table-field-options .form-control {
