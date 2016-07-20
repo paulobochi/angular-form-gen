@@ -1,7 +1,12 @@
 <fieldset fg-fieldlist>
   <span ng-if="field.schema.nolabel">{{ field.schema.properties.displayName }}</span>
-  <div ng-repeat="child in field.schema.childs.fields">
-    <div fg-field="child" fg-parent="field"></div>
+  <ol class="fg-fieldlist">
+    <li ng-repeat="child in field.schema.childs.fields">
+      <button type="button" class="btn btn-danger fg-btn-remove" ng-click="removeField(child)" ng-if="field.schema.childs.fields.length > 1">Remover</button>
+      <div fg-field="child" fg-parent="field"></div>
+    </li>
+  </ol>
+  <div class="fg-actions">
+    <button type="button" class="btn btn-default" ng-click="addField()"><i class="fa fa-plus"></i> Adicionar {{field.schema.childs.fields[0].properties.displayName}}</div>
   </div>
-  <button type="button" class="btn btn-default" ng-click="addField()">Add</div>
 </fieldset>

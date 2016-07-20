@@ -197,7 +197,7 @@ fg.config(function (fgConfigProvider, FgField) {
     ],
     'Checkbox fields': [
       new FgField('checkbox', { properties: { nolabel: true }}),
-      new FgField('checkboxlist', {
+      /*new FgField('checkboxlist', {
         properties: {
           displayName: 'Checkbox List',
           options: [
@@ -219,7 +219,7 @@ fg.config(function (fgConfigProvider, FgField) {
           '1': true,
           '2': true
         }
-      })
+      }*/)
     ],
     'Select input fields': [
       new FgField('radiobuttonlist', {

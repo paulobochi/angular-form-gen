@@ -28,8 +28,9 @@ fg.controller('fgFieldController', function($scope, fgUtils) {
       data: {}
     };
 
-    if (fieldSchema) {
-      _field.data.name = fieldSchema.name
+    if (fieldSchema && fieldSchema.properties) {
+      _field.data.name = fieldSchema.properties.name,
+      _field.data.type = fieldSchema.type
     }
 
     $scope.$watch('field.schema.name', function(value, oldValue) {
@@ -68,7 +69,7 @@ fg.controller('fgFieldController', function($scope, fgUtils) {
         }
       });
 
-      $scope.$watch('field.schema.name', function(value, oldValue) {
+      $scope.$watch('field.schema.properties.name', function(value, oldValue) {
         if(value !== oldValue) {
           _field.data.name = value;
         }
@@ -100,6 +101,10 @@ fg.controller('fgFieldController', function($scope, fgUtils) {
     _field.name = fieldName;
 
   };
+
+  this.removeChild = function(index) {
+    _field.data.fields.splice(index, 1);
+  }
 
   this.field = function() {
     return _field;

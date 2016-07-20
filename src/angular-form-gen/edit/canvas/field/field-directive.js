@@ -8,7 +8,7 @@ fg.directive('fgEditCanvasField', function ($timeout) {
 
       $scope.toggleProperties = function (field) {
         if (field.$_displayProperties) {
-          field.$_displayProperties = field.$_invalid;
+          field.$_displayProperties = field.$_invalid && (field.type !== 'fieldgroup' && field.type !== 'fieldlist');
         } else {
           field.$_displayProperties = true;
         }

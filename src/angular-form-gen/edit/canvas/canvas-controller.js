@@ -78,8 +78,10 @@ fg.controller('fgEditCanvasController', function ($scope, dqUtils, $timeout, fgU
   };
 
   this.dropCallback = function(event, index, item, external, type) {
-    item.formName = 'field' + fgUtils.getUnique();
-    item.name = item.formName;
+    item.name = 'field' + fgUtils.getUnique();
+    if (!item.properties.name) {
+      item.properties.name = item.name;
+    }
     return item;
   }
 

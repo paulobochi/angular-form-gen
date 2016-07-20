@@ -320,8 +320,9 @@ describe('fg-field-controller', function() {
         };
 
         var fieldSchema = {
-          name: origFieldName,
-
+          properties: {
+            name: origFieldName
+          },
           /* since we're in edit mode; this schema value will be assigned on
            * the first $digest */
 
@@ -341,7 +342,7 @@ describe('fg-field-controller', function() {
 
         // Act
 
-        $scope.field.schema.name = newFieldName;
+        $scope.field.schema.properties.name = newFieldName;
         $scope.$digest();
 
         // Assert

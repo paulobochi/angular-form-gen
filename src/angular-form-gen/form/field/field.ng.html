@@ -1,4 +1,4 @@
-<div class="fg-field-inner form-group" ng-class="{ 'fg-field-required': fieldSchema.validation.required, 'has-error': form.state[field.formName].$invalid && (form.state.$submitted || form.state[field.formName].$touched) }">
+<div class="fg-field-inner form-group" ng-class="{ 'fg-field-required': fieldSchema.validation.required, 'has-error': form.state[field.name].$invalid && (form.state.$submitted || form.state[field.name].$touched) }">
 	<div class="fg-line" ng-if="field.schema.type != 'date'">
 		<label ng-if="!field.schema.properties.nolabel" class="control-label" for="{{ field.$_id }}">{{ fieldSchema.properties.displayName }}</label>
 		<div ng-include="renderInfo.templateUrl"></div>
